@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         //Database
-        dbHelper = new DatabaseHelper();
+        dbHelper = new DatabaseHelper(this);
 
         //GUI
         et_j_username = findViewById(R.id.et_v_main_username);
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity
         btn_j_login = findViewById(R.id.btn_v_main_login);
         btn_j_createAccount = findViewById(R.id.btn_v_main_createAccount);
 
-        
+
 
     }
 }
