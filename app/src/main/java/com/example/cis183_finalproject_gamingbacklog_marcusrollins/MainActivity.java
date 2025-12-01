@@ -1,5 +1,6 @@
 package com.example.cis183_finalproject_gamingbacklog_marcusrollins;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +35,14 @@ public class MainActivity extends AppCompatActivity
 
         //Database
         dbHelper = new DatabaseHelper(this);
+        //This opens the database
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        //Debugging Dummy Data
+        dbHelper.debugPrintUsers(db);
+        dbHelper.debugPrintSystems(db);
+        dbHelper.debugPrintGames(db);
+        dbHelper.debugPrintUserGames(db);
 
         //GUI
         et_j_username = findViewById(R.id.et_v_main_username);
