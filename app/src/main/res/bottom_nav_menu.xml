@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_person" />
+
+    <item
+        android:id="@+id/nav_community"
+        android:title="Community"
+        android:icon="@drawable/ic_group" />
+
+    <item
+        android:id="@+id/nav_games"
+        android:title="Games"
+        android:icon="@drawable/ic_games" />
+</menu>

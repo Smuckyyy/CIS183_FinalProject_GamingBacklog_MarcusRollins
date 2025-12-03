@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CIS183_FinalProject_GamingBacklog_MarcusRollins">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CreateAccount"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

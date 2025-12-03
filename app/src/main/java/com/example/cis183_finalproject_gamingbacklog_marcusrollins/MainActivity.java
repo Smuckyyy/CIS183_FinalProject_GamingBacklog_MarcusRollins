@@ -1,7 +1,9 @@
 package com.example.cis183_finalproject_gamingbacklog_marcusrollins;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -19,6 +21,10 @@ public class MainActivity extends AppCompatActivity
     Button btn_j_login;
     Button btn_j_createAccount;
 
+
+    //----------------------------------------------------------------------------------------------------------------------
+    //MAIN IS THE LOGIN INTENT. ANYTHING NEEDED TO LOGIN WILL BE FROM HERE
+    //----------------------------------------------------------------------------------------------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -50,7 +56,20 @@ public class MainActivity extends AppCompatActivity
         btn_j_login = findViewById(R.id.btn_v_main_login);
         btn_j_createAccount = findViewById(R.id.btn_v_main_createAccount);
 
+        buttonCallListener();
 
+    }
 
+    private void buttonCallListener()
+    {
+        btn_j_createAccount.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent createAccountIntent = new Intent(MainActivity.this, CreateAccount.class);
+                startActivity(createAccountIntent);
+            }
+        });
     }
 }
