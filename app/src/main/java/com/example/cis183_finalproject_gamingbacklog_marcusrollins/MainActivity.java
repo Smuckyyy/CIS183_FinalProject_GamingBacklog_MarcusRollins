@@ -1,6 +1,7 @@
 package com.example.cis183_finalproject_gamingbacklog_marcusrollins;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -69,6 +70,43 @@ public class MainActivity extends AppCompatActivity
             {
                 Intent createAccountIntent = new Intent(MainActivity.this, CreateAccount.class);
                 startActivity(createAccountIntent);
+            }
+        });
+
+        btn_j_login.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                String username = et_j_username.getText().toString().trim();
+                String password = et_j_password.getText().toString().trim();
+
+                if (username.isEmpty() || password.isEmpty())
+                {
+                    et_j_password.setError("Please enter both fields");
+                    return;
+                }
+
+                SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+                Cursor cursor = db.rawQuery("SELECT userId FROM Users WHERE username = ? AND password = ?", new String[]{username, password});
+
+                if (cursor.moveToFirst())
+                {
+                    //Logged in — get userId
+                    int userId = cursor.getInt(0);
+                    cursor.close();
+
+                    //Send to profile
+                    Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                    intent.putExtra("userId", userId);
+                    startActivity(intent);
+                }
+                else
+                {
+                    cursor.close();
+                    et_j_password.setError("Invalid username or password");
+                }
             }
         });
     }

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    tools:context=".GameViewerActivity">
 
     <LinearLayout
         android:id="@+id/bottom_nav"
@@ -14,15 +14,15 @@
         android:background="@color/cardview_dark_background"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/tab_community"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="Community"
             android:textColor="@color/white"
             android:textSize="20sp" />
@@ -36,8 +36,8 @@
             android:id="@+id/tab_games"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="Game Viewer"
             android:textColor="@color/white"
             android:textSize="20sp" />
@@ -51,12 +51,50 @@
             android:id="@+id/tab_profile"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="Profile"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
     </LinearLayout>
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_v_gameview_status"
+        android:layout_width="414dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabBackground="@color/cardview_dark_background"
+        app:tabIndicatorColor="#FF5722"
+        app:tabTextColor="@color/white">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_v_gameview_mainrotation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Main/Rotation" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_v_gameview_backlogged"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Backlogged" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_v_gameview_completed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Completed" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <ListView
+        android:id="@+id/lv_v_gameview_listOfGames"
+        android:layout_width="409dp"
+        android:layout_height="609dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tab_v_gameview_status" />
 </androidx.constraintlayout.widget.ConstraintLayout>

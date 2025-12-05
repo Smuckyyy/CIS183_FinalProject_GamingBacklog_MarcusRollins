@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
     public DatabaseHelper(Context c)
     {
         //CHANGE VERSION NAME IF MAKING EDITS TO THE DATABASE AFTER RUNNING
-        super(c, database_name, null, 3);
+        super(c, database_name, null, 6);
     }
 
     @Override
@@ -30,8 +30,8 @@ public class DatabaseHelper extends SQLiteOpenHelper
 
         //DUMMY DATA
         //Users
-        db.execSQL("INSERT INTO Users (username, password, totalXp) VALUES ('marcus', 'pass123', 0);");
-        db.execSQL("INSERT INTO Users (username, password, totalXp) VALUES ('alex', 'pass123', 0);");
+        db.execSQL("INSERT INTO Users (username, password, totalXp) VALUES ('MadiChoni', 'roxy', 0);");
+        db.execSQL("INSERT INTO Users (username, password, totalXp) VALUES ('NukeNasty', 'hogan', 0);");
 
         //Systems
         db.execSQL("INSERT INTO Systems (systemName) VALUES ('PlayStation');");
@@ -46,10 +46,11 @@ public class DatabaseHelper extends SQLiteOpenHelper
         //UserGames
         db.execSQL("INSERT INTO UserGames (userId, gameId, status, earnedXp) VALUES (1, 1, 'main', 120);");
         db.execSQL("INSERT INTO UserGames (userId, gameId, status, earnedXp) VALUES (1, 3, 'completed', 300);");
-        db.execSQL("INSERT INTO UserGames (userId, gameId, status, earnedXp) VALUES (2, 2, 'backlog', 0);");
+        db.execSQL("INSERT INTO UserGames (userId, gameId, status, earnedXp) VALUES (2, 2, 'backlogged', 0);");
 
     }
 
+    //This can be changed later on to ALTER table instead of DROP. DROP will delete any users created and ALTER will just allow the version change to go through without deleting anything new
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
@@ -120,8 +121,14 @@ public class DatabaseHelper extends SQLiteOpenHelper
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    public Cursor getGamesByStatus(int userId, String status)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
 
+        String query = "SELECT g.gameName, s.systemName, ug.status, ug.earnedXp " + "FROM UserGames ug " + "INNER JOIN Games g ON ug.gameId = g.gameId " + "INNER JOIN Systems s ON g.systemId = s.systemId " + "WHERE ug.userId = ? AND ug.status = ?";
 
+        return db.rawQuery(query, new String[]{ String.valueOf(userId), status });
+    }
 
 
 }

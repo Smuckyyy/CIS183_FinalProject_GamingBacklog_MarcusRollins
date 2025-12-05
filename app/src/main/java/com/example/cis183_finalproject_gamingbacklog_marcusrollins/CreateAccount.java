@@ -62,17 +62,19 @@ public class CreateAccount extends AppCompatActivity
         if(username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty())
         {
             Toast.makeText(this, "All fields need to be entered.", Toast.LENGTH_SHORT).show();
+            return; //Stop here
         }
 
         if(!password.equals(confirmPassword))
         {
-            Toast.makeText(this, "All fields need to be entered.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Password does not match!", Toast.LENGTH_SHORT).show();
+            return; //Stop here
         }
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         //Check if username exists
-        Cursor cursor = db.rawQuery("SELECT * FROM Users WHERE Username = ?", new String[]{username});
+        Cursor cursor = db.rawQuery("SELECT * FROM Users WHERE username = ?", new String[]{username});
 
         if(cursor.moveToFirst())
         {
@@ -85,7 +87,7 @@ public class CreateAccount extends AppCompatActivity
         cursor.close();
 
         //Put user in database
-        String insertSQL = "INSERT INTO Users (Username, Password, XP) VALUES (?, ?, ?);";
+        String insertSQL = "INSERT INTO Users (username, password, totalXp) VALUES (?, ?, ?);";
         db.execSQL(insertSQL, new Object[]{username, password, 0});
 
         Toast.makeText(this, "Account Created, can now Login", Toast.LENGTH_SHORT).show();
