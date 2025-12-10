@@ -130,5 +130,19 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return db.rawQuery(query, new String[]{ String.valueOf(userId), status });
     }
 
+    public Cursor getAllSystems()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT systemId, systemName FROM Systems", null);
+    }
+
+    public void addSystem(String systemName)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("INSERT INTO Systems (systemName) VALUES (?);", new Object[]{ systemName });
+
+        db.close();
+    }
+
 
 }

@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CIS183_FinalProject_GamingBacklog_MarcusRollins">
         <activity
+            android:name=".AddGameToUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddSystemDatabaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddGameDatabaseActivity"
+            android:exported="false" />
+        <activity
             android:name=".CommunityActivity"
             android:exported="false" />
         <activity

@@ -2,6 +2,8 @@ package com.example.cis183_finalproject_gamingbacklog_marcusrollins;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,6 +15,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class ProfileActivity extends AppCompatActivity
 {
+    Button btn_j_addGame;
+    Button btn_j_addSystem;
     TextView tabProfile, tabGames, tabCommunity;
     int currentUserId;
 
@@ -32,12 +36,16 @@ public class ProfileActivity extends AppCompatActivity
         currentUserId = getIntent().getIntExtra("userId", -1);
 
         //GUI
+        btn_j_addGame = findViewById(R.id.btn_v_profile_addGame);
+        btn_j_addSystem = findViewById(R.id.btn_v_profile_addSystem);
+
         //Bottom tab references
         tabProfile = findViewById(R.id.tab_profile);
         tabGames = findViewById(R.id.tab_games);
         tabCommunity = findViewById(R.id.tab_community);
 
         setupBottomTabs();
+        buttonCallListener();
 
     }
 
@@ -60,6 +68,31 @@ public class ProfileActivity extends AppCompatActivity
             Intent intent = new Intent(ProfileActivity.this, CommunityActivity.class);
             intent.putExtra("userId", currentUserId);
             startActivity(intent);
+        });
+    }
+
+    private void buttonCallListener()
+    {
+        //Add Game
+        btn_j_addGame.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent addGameIntent = new Intent(ProfileActivity.this, AddGameDatabaseActivity.class);
+                startActivity(addGameIntent);
+            }
+        });
+
+        //Add System
+        btn_j_addSystem.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent addSystemIntent = new Intent(ProfileActivity.this, AddSystemDatabaseActivity.class);
+                startActivity(addSystemIntent);
+            }
         });
     }
 }
