@@ -1,6 +1,5 @@
 package com.example.cis183_finalproject_gamingbacklog_marcusrollins;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -52,17 +51,15 @@ public class AddSystemDatabaseActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                String name = et_j_systemName.getText().toString().trim();
+                String sysName = et_j_systemName.getText().toString().trim();
 
-                if(name.isEmpty())
+                if (sysName.isEmpty())
                 {
                     et_j_systemName.setError("System name required");
                     return;
                 }
 
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
-                String sql = "INSERT INTO Systems (systemName) VALUES (?)";
-                db.execSQL(sql, new Object[]{et_j_systemName});
+                dbHelper.addSystem(sysName);
 
                 Toast.makeText(AddSystemDatabaseActivity.this, "System added!", Toast.LENGTH_SHORT).show();
                 finish();

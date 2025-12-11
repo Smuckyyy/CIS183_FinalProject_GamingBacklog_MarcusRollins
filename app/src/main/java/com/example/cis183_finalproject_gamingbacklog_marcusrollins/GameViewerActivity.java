@@ -143,6 +143,27 @@ public class GameViewerActivity extends AppCompatActivity
         lv_j_gameViewer.setAdapter(adapter);
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+        int selected = tab_j_status.getSelectedTabPosition();
+
+        switch (selected) {
+            case 0:
+                populateGameList(); //Main/Rotation
+                break;
+            case 1:
+                populateBackloggedList(); //Backlogged
+                break;
+            case 2:
+                populateCompletedList(); //Completed
+                break;
+        }
+    }
+
+
     private void populateGameList()
     {
         gameInfoList.clear();

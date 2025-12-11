@@ -16,7 +16,6 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_v_addsystemdb_addSystem" />
 
@@ -24,36 +23,35 @@
         android:id="@+id/btn_v_addsystemdb_addSystem"
         android:layout_width="126dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="34dp"
+        android:layout_marginBottom="33dp"
         android:text="Add System"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_v_addsystemdb_back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_v_addsystemdb_systemName" />
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="7dp"
         android:text="Add System"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView17"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView17"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="67dp"
+        android:layout_marginBottom="81dp"
         android:text="Add a system to the database here!"
-        app:layout_constraintBottom_toTopOf="@+id/et_v_addsystemdb_systemName"
+        app:layout_constraintBottom_toTopOf="@+id/textView18"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
@@ -62,23 +60,24 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="210dp"
         android:text="System Name:"
-        app:layout_constraintBaseline_toBaselineOf="@+id/et_v_addsystemdb_systemName"
+        app:layout_constraintBottom_toTopOf="@+id/btn_v_addsystemdb_addSystem"
         app:layout_constraintEnd_toStartOf="@+id/et_v_addsystemdb_systemName"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <EditText
         android:id="@+id/et_v_addsystemdb_systemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="29dp"
-        android:layout_marginBottom="197dp"
+        android:layout_marginTop="158dp"
+        android:layout_marginEnd="28dp"
         android:ems="10"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/btn_v_addsystemdb_addSystem"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView18"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

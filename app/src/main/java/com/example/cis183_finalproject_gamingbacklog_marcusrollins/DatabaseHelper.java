@@ -140,8 +140,47 @@ public class DatabaseHelper extends SQLiteOpenHelper
     {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("INSERT INTO Systems (systemName) VALUES (?);", new Object[]{ systemName });
+    }
 
-        db.close();
+    public int getTotalXpForUser(int userId)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT SUM(earnedXp) FROM UserGames WHERE userId = ?";
+        Cursor cursor = db.rawQuery(sql, new String[]{ String.valueOf(userId) });
+
+        int totalXp = 0;
+        if (cursor.moveToFirst())
+        {
+            totalXp = cursor.isNull(0) ? 0 : cursor.getInt(0);
+        }
+
+        cursor.close();
+        return totalXp;
+    }
+
+    public Cursor getSystemsForUser(int userId)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String sql = "SELECT DISTINCT s.systemName " + "FROM UserGames ug " + "JOIN Games g ON ug.gameId = g.gameId " + "JOIN Systems s ON g.systemId = s.systemId " + "WHERE ug.userId = ?";
+
+        return db.rawQuery(sql, new String[]{ String.valueOf(userId) });
+    }
+
+    public String getUsernameById(int userId)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT username FROM Users WHERE userId = ?", new String[]{String.valueOf(userId)});
+
+        if (cursor.moveToFirst())
+        {
+            String name = cursor.getString(0);
+            cursor.close();
+            return name;
+        }
+
+        cursor.close();
+        return null;
     }
 
 

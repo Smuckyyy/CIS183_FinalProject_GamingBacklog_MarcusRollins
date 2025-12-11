@@ -56,6 +56,7 @@ public class AddGameDatabaseActivity extends AppCompatActivity
         buttonCallListener();
     }
 
+    //We need onResume so that if the user adds a new system, it will show up once they get into here
     @Override
     protected void onResume()
     {
@@ -70,6 +71,7 @@ public class AddGameDatabaseActivity extends AppCompatActivity
         ArrayList<String> systemNames = new ArrayList<>();
         systemIds.clear();
 
+        //This cursor queries through systems in the DB to load them into the spinner
         while(cursor.moveToNext())
         {
             systemIds.add(cursor.getInt(0)); //ID
@@ -99,7 +101,7 @@ public class AddGameDatabaseActivity extends AppCompatActivity
                 String sql = "INSERT INTO Games (gameName, systemId) VALUES (?, ?)";
                 db.execSQL(sql, new Object[]{gameName, systemId});
 
-                Toast.makeText(AddGameDatabaseActivity.this, "Game Added", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddGameDatabaseActivity.this, "Game added!", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
