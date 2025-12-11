@@ -183,5 +183,48 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return null;
     }
 
+    //FOR THE COMMUNITY PAGE
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Get all usernames
+    public Cursor getAllUsernames()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT username FROM Users";
+        return db.rawQuery(sql, null);
+    }
+
+    //Games logged per user
+    public Cursor getGamesLogged()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT u.username, COUNT(ug.gameId) AS gamesLogged " + "FROM Users u " + "LEFT JOIN UserGames ug ON u.userId = ug.userId " + "GROUP BY u.userId";
+        return db.rawQuery(sql, null);
+    }
+
+    //All systems
+    public Cursor getAllSystemsCommunity()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT systemName FROM Systems";
+        return db.rawQuery(sql, null);
+    }
+
+    //Game XP across all users
+    public Cursor getGameXpTotals()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT g.gameName, SUM(ug.earnedXp) AS totalXp " + "FROM UserGames ug " + "JOIN Games g ON ug.gameId = g.gameId " + "GROUP BY ug.gameId";
+        return db.rawQuery(sql, null);
+    }
+
+    //Top games played by all users
+    public Cursor getTopGamesPlayed()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT g.gameName, COUNT(*) AS timesPlayed " + "FROM UserGames ug " + "JOIN Games g ON ug.gameId = g.gameId " + "GROUP BY ug.gameId " + "ORDER BY timesPlayed DESC";
+        return db.rawQuery(sql, null);
+    }
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 }
