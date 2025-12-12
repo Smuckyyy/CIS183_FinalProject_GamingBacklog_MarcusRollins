@@ -22,6 +22,7 @@ public class ProfileActivity extends AppCompatActivity
     Button btn_j_addGameToProfile;
     Button btn_j_addGameToDB;
     Button btn_j_addSystemToDB;
+    Button btn_j_logout;
     TextView tabProfile, tabGames, tabCommunity;
     int currentUserId;
 
@@ -62,14 +63,16 @@ public class ProfileActivity extends AppCompatActivity
         btn_j_addGameToProfile = findViewById(R.id.btn_v_profile_addGameToProfile);
         btn_j_addGameToDB = findViewById(R.id.btn_v_profile_addGameToDB);
         btn_j_addSystemToDB = findViewById(R.id.btn_v_profile_addSystemToDB);
+        btn_j_logout = findViewById(R.id.btn_v_profile_logout);
 
         //Bottom tab references
         tabProfile = findViewById(R.id.tab_profile);
         tabGames = findViewById(R.id.tab_games);
         tabCommunity = findViewById(R.id.tab_community);
 
-        setupBottomTabs();
+
         loadUserProfile();
+        setupBottomTabs();
         buttonCallListener();
 
     }
@@ -155,5 +158,27 @@ public class ProfileActivity extends AppCompatActivity
                 startActivity(addGameToProfileIntent);
             }
         });
+
+        //Logout
+        btn_j_logout.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                //What flag activity clear top does is not allow the user to use the android feature of sliding the edge of the screen to the center to go back if they choose to logout.
+                //This makes it so the userId doesn't get messed up if they "accidentally" or purposefully going back using the basic android feature.
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        loadUserProfile();
     }
 }

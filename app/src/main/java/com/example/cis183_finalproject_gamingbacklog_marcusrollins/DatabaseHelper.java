@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
     public DatabaseHelper(Context c)
     {
         //CHANGE VERSION NAME IF MAKING EDITS TO THE DATABASE AFTER RUNNING
-        super(c, database_name, null, 6);
+        super(c, database_name, null, 8);
     }
 
     @Override
@@ -44,8 +44,8 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.execSQL("INSERT INTO Games (gameName, systemId) VALUES ('Zelda TOTK', 3);");
 
         //UserGames
-        db.execSQL("INSERT INTO UserGames (userId, gameId, status, earnedXp) VALUES (1, 1, 'main', 120);");
-        db.execSQL("INSERT INTO UserGames (userId, gameId, status, earnedXp) VALUES (1, 3, 'completed', 300);");
+        db.execSQL("INSERT INTO UserGames (userId, gameId, status, earnedXp) VALUES (1, 1, 'main', 100);");
+        db.execSQL("INSERT INTO UserGames (userId, gameId, status, earnedXp) VALUES (1, 3, 'completed', 100);");
         db.execSQL("INSERT INTO UserGames (userId, gameId, status, earnedXp) VALUES (2, 2, 'backlogged', 0);");
 
     }
@@ -65,59 +65,60 @@ public class DatabaseHelper extends SQLiteOpenHelper
     }
 
 
+    //Debugging code
     //This is for debug and showing dummy data
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //Show users
-    public void debugPrintUsers(SQLiteDatabase db)
-    {
-        Cursor cursor = db.rawQuery("SELECT * FROM Users", null);
-
-        while (cursor.moveToNext())
-        {
-            Log.d("DB_DEBUG", "UserID: " + cursor.getInt(0) + " | Username: " + cursor.getString(1) + " | XP: " + cursor.getInt(3));
-        }
-
-        cursor.close();
-    }
-
-    //Show systems
-    public void debugPrintSystems(SQLiteDatabase db)
-    {
-        Cursor cursor = db.rawQuery("SELECT * FROM Systems", null);
-
-        while (cursor.moveToNext())
-        {
-            Log.d("DB_DEBUG", "SystemID: " + cursor.getInt(0) + " | SystemName: " + cursor.getString(1));
-        }
-
-        cursor.close();
-    }
-
-    //Show games
-    public void debugPrintGames(SQLiteDatabase db)
-    {
-        Cursor cursor = db.rawQuery("SELECT * FROM Games", null);
-
-        while (cursor.moveToNext())
-        {
-            Log.d("DB_DEBUG", "GameID: " + cursor.getInt(0) + " | GameName: " + cursor.getString(1) + " | SystemID: " + cursor.getInt(2));
-        }
-
-        cursor.close();
-    }
-
-    //Show UserGames(Community Tab)
-    public void debugPrintUserGames(SQLiteDatabase db)
-    {
-        Cursor cursor = db.rawQuery("SELECT * FROM UserGames", null);
-
-        while (cursor.moveToNext())
-        {
-            Log.d("DB_DEBUG", "UserGameID: " + cursor.getInt(0) + " | UserID: " + cursor.getInt(1) + " | GameID: " + cursor.getInt(2) + " | Status: " + cursor.getString(3) + " | EarnedXP: " + cursor.getInt(4));
-        }
-
-        cursor.close();
-    }
+//    public void debugPrintUsers(SQLiteDatabase db)
+//    {
+//        Cursor cursor = db.rawQuery("SELECT * FROM Users", null);
+//
+//        while (cursor.moveToNext())
+//        {
+//            Log.d("DB_DEBUG", "UserID: " + cursor.getInt(0) + " | Username: " + cursor.getString(1) + " | XP: " + cursor.getInt(3));
+//        }
+//
+//        cursor.close();
+//    }
+//
+//    //Show systems
+//    public void debugPrintSystems(SQLiteDatabase db)
+//    {
+//        Cursor cursor = db.rawQuery("SELECT * FROM Systems", null);
+//
+//        while (cursor.moveToNext())
+//        {
+//            Log.d("DB_DEBUG", "SystemID: " + cursor.getInt(0) + " | SystemName: " + cursor.getString(1));
+//        }
+//
+//        cursor.close();
+//    }
+//
+//    //Show games
+//    public void debugPrintGames(SQLiteDatabase db)
+//    {
+//        Cursor cursor = db.rawQuery("SELECT * FROM Games", null);
+//
+//        while (cursor.moveToNext())
+//        {
+//            Log.d("DB_DEBUG", "GameID: " + cursor.getInt(0) + " | GameName: " + cursor.getString(1) + " | SystemID: " + cursor.getInt(2));
+//        }
+//
+//        cursor.close();
+//    }
+//
+//    //Show UserGames(Community Tab)
+//    public void debugPrintUserGames(SQLiteDatabase db)
+//    {
+//        Cursor cursor = db.rawQuery("SELECT * FROM UserGames", null);
+//
+//        while (cursor.moveToNext())
+//        {
+//            Log.d("DB_DEBUG", "UserGameID: " + cursor.getInt(0) + " | UserID: " + cursor.getInt(1) + " | GameID: " + cursor.getInt(2) + " | Status: " + cursor.getString(3) + " | EarnedXP: " + cursor.getInt(4));
+//        }
+//
+//        cursor.close();
+//    }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -24,7 +24,9 @@
         android:layout_height="65dp"
         android:background="@color/cardview_dark_background"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteY="666dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/tab_community"
@@ -74,13 +76,14 @@
         android:layout_height="459dp"
         android:layout_marginBottom="136dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_v_community_users"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Top Users"
+        android:text="Users"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lv_v_community_listOfUsers"
@@ -94,16 +97,16 @@
         android:text="Popular Games"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
         app:layout_constraintEnd_toStartOf="@+id/btn_v_community_systems"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toEndOf="@+id/btn_v_community_users"
         app:layout_constraintTop_toBottomOf="@+id/lv_v_community_listOfUsers"
         app:layout_constraintVertical_bias="0.229" />
 
     <Button
         android:id="@+id/btn_v_community_systems"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Systems"
+        android:layout_width="113dp"
+        android:layout_height="54dp"
+        android:text="Top Systems"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lv_v_community_listOfUsers"

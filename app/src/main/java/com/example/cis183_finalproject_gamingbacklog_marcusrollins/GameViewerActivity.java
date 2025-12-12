@@ -42,7 +42,7 @@ public class GameViewerActivity extends AppCompatActivity
 
         //Get current userId from intent
         currentUserId = getIntent().getIntExtra("userId", -1);
-        Log.d("GameViewer", "Loaded userId = " + currentUserId);
+        //Log.d("GameViewer", "Loaded userId = " + currentUserId);
 
 
         //Database
@@ -60,9 +60,10 @@ public class GameViewerActivity extends AppCompatActivity
         tabGames = findViewById(R.id.tab_games);
         tabCommunity = findViewById(R.id.tab_community);
 
-        setupBottomTabs();
+
         setupTabLayout();
         populateGameList();
+        setupBottomTabs();
     }
 
 
