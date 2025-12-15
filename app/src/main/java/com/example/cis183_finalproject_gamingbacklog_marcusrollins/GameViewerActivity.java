@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -50,6 +51,28 @@ public class GameViewerActivity extends AppCompatActivity
 
         //GUI
         lv_j_gameViewer = findViewById(R.id.lv_v_gameview_listOfGames);
+
+        //Long click listener to delete a game from the users profile
+        lv_j_gameViewer.setOnItemLongClickListener((parent, view, position, id) ->
+        {
+            GameInfo selectedGame = gameInfoList.get(position);
+
+            //Create an alert incase the user accidentally held down on the game
+            new AlertDialog.Builder(GameViewerActivity.this)
+                    .setTitle("Remove Game")
+                    .setMessage("Remove \"" + selectedGame.getGameName() + "\" from your profile?")
+                    .setPositiveButton("Remove", (dialog, which) ->
+                    {
+                        dbHelper.removeGameFromUser(currentUserId, selectedGame.getGameName());
+
+                        //Refresh current tab
+                        refreshCurrentTab();
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+
+            return true;
+        });
         gameInfoList = new ArrayList<>();
 
         //TabLayout for Status
@@ -144,6 +167,22 @@ public class GameViewerActivity extends AppCompatActivity
         lv_j_gameViewer.setAdapter(adapter);
     }
 
+    private void refreshCurrentTab() {
+        int tabPosition = tab_j_status.getSelectedTabPosition();
+
+        switch (tabPosition) {
+            case 0:
+                populateGameList();
+                break;
+            case 1:
+                populateBackloggedList();
+                break;
+            case 2:
+                populateCompletedList();
+                break;
+        }
+    }
+
     @Override
     protected void onResume()
     {
@@ -163,6 +202,8 @@ public class GameViewerActivity extends AppCompatActivity
                 break;
         }
     }
+
+
 
 
     private void populateGameList()

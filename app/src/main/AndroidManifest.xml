@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CIS183_FinalProject_GamingBacklog_MarcusRollins">
         <activity
+            android:name=".RemoveSystemActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddGameToUserActivity"
             android:exported="false" />
         <activity

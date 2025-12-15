@@ -184,6 +184,31 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return null;
     }
 
+    public void deleteUser(int userId)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM UserGames WHERE userId = ?", new Object[]{userId});
+        db.execSQL("DELETE FROM Users WHERE userId = ?", new Object[]{userId});
+    }
+
+    public void removeGameFromUser(int userId, String gameName)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String sql = "DELETE FROM UserGames " + "WHERE userId = ? AND gameId = (" + "SELECT gameId FROM Games WHERE gameName = ?" + ")";
+
+        db.execSQL(sql, new Object[]{ userId, gameName });
+    }
+
+    public void removeSystemFromUser(int userId, String systemName)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String sql = "DELETE FROM UserGames " + "WHERE userId = ? AND gameId IN (" + "SELECT g.gameId FROM Games g " + "JOIN Systems s ON g.systemId = s.systemId " + "WHERE s.systemName = ?" + ")";
+
+        db.execSQL(sql, new Object[]{ userId, systemName });
+    }
+
     //FOR THE COMMUNITY PAGE
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //Get all usernames

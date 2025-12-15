@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -23,6 +24,8 @@ public class ProfileActivity extends AppCompatActivity
     Button btn_j_addGameToDB;
     Button btn_j_addSystemToDB;
     Button btn_j_logout;
+    Button btn_j_removeSystem;
+    Button btn_j_deleteAccount;
     TextView tabProfile, tabGames, tabCommunity;
     int currentUserId;
 
@@ -63,7 +66,9 @@ public class ProfileActivity extends AppCompatActivity
         btn_j_addGameToProfile = findViewById(R.id.btn_v_profile_addGameToProfile);
         btn_j_addGameToDB = findViewById(R.id.btn_v_profile_addGameToDB);
         btn_j_addSystemToDB = findViewById(R.id.btn_v_profile_addSystemToDB);
+        btn_j_removeSystem = findViewById(R.id.btn_v_profile_removeSystem);
         btn_j_logout = findViewById(R.id.btn_v_profile_logout);
+        btn_j_deleteAccount = findViewById(R.id.btn_v_profile_delete);
 
         //Bottom tab references
         tabProfile = findViewById(R.id.tab_profile);
@@ -172,6 +177,40 @@ public class ProfileActivity extends AppCompatActivity
                 startActivity(intent);
                 finish();
             }
+        });
+
+        //Remove system
+        btn_j_removeSystem.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(ProfileActivity.this, RemoveSystemActivity.class);
+                intent.putExtra("userId", currentUserId);
+                startActivity(intent);
+            }
+        });
+
+        //Delete an account
+        btn_j_deleteAccount.setOnClickListener(v ->
+        {
+            //Add an alert to stop the user incase they accidentally clicked delete account
+            new AlertDialog.Builder(ProfileActivity.this)
+                    .setTitle("Delete Account")
+                    .setMessage("This will permanently delete your account and all your games. This cannot be undone, are you sure?")
+                    .setPositiveButton("Delete", (dialog, which) ->
+                    {
+                        dbHelper.deleteUser(currentUserId);
+
+                        //Go back to login screen
+                        Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                        //Add to prevent user from going back after it's deleted
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
         });
     }
 
